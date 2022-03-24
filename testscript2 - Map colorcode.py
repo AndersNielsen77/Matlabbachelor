@@ -4,8 +4,7 @@ import xlsxwriter
 import numpy as np
 from gmplot import gmplot
 import matplotlib.pyplot as plt
-
-
+import mpu
 
 array = []
 array2 = []
@@ -27,8 +26,8 @@ lng110 = []
 lng120 = []
 lngs = []
 #file = np.genfromtxt('C:\Testsides3\Walk fra edge til kildedal st.csv', delimiter= ',')
-file = np.genfromtxt('C:\Testsides3\Maalov1 Walk.csv', delimiter= ',')
-#file = np.genfromtxt('C:\Testsides3\Alb Real1.csv', delimiter= ',')
+#file = np.genfromtxt('C:\Testsides3\Maalov1 Walk.csv', delimiter= ',')
+file = np.genfromtxt('C:\Testsides3\Alb Real1.csv', delimiter= ',')
 #file = np.genfromtxt('C:\Testsides3\Quick maalov for switch.csv', delimiter= ',')
 
 
@@ -121,28 +120,42 @@ print("SINR MAX: ",np.max(SINR))
 print("SINR mean: ",np.mean(SINR))
 print("SINR MIN: ",np.min(SINR))
 print("-------------------")
-print("-------------------")
 print("THDL MAX: ",np.max(THDL))
 print("THDL mean: ",np.mean(THDL))
 print("THDL MIN: ",np.min(THDL))
 print("-------------------")
 
 
-RSRP = RSRP[1::50]
-SINR = SINR[1::50]
+RSRP = RSRP[1::1]
+SINR = SINR[1::1]
 print(np.size(RSRP))
 
-x = np.arange(0, 247)
+"""
+lat1 = 52.2296756
+lon1 = 21.0122287
+
+# Point two
+lat2 = 52.406374
+lon2 = 16.9251681
+
+# What you were looking for
+dist = mpu.haversine_distance((lat1, lon1), (lat2, lon2))
+print(dist)
+"""
+X = range(0,np.size(RSRP))
 
 
-A,B = np.meshgrid(RSRP,)                                                                                      
-plt.scatter(A,B)
+z = np.polyfit(X, RSRP, 1)
+p = np.poly1d(z)
+plt.plot(X,p(X),"r--")
+
+plt.plot(X, RSRP, 'g', label='Label 1')
 plt.show()
 
-#000000
-#FF0000
-#00FF00
-#FFFFFF
-#
-#
-#
+"""
+For at lave sampels over distande:
+1. Lave matrix over cod og RSRP
+2. Fjerne nan collum or row
+3. Beregne en distance fra startpunkt/mast til enkelt sample coordinat
+4. Plot signal over distance
+"""
