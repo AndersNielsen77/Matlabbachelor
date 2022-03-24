@@ -34,3 +34,4 @@ gmap3.scatter( lat, lng, '#00FFFF', marker = True )
 #gmap3.scatter( lat, lng, '#FF0000', marker = True )
 gmap3.plot(lat, lng, 'cornflowerblue', edge_width = 2.5)
 gmap3.draw( "C:\Testsides3\map13.html")
+##
