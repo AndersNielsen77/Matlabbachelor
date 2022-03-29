@@ -12,7 +12,8 @@ AntennaGainRx = 5;
 HTeff = TXheight
 
 Frequency = [1.8*10^9 3.5*10^9];
-Wavelength = (3.0*10^8./(Frequency))
+Wavelength = [0.1665513655556 0.085654988];
+%Wavelength = (3.0*10^8./(Frequency))
 
 Watt = 80;
 TransmitterPower = 10*log10(Watt/0.001);
@@ -28,7 +29,7 @@ for W = 1:size(Wavelength,2)
     R =zeros(Tdistance/10,1);
     for D = 1:size(Distance,2)
        %R(D) = 20*log10(4*pi*1/Wavelength(W))+10*2.16*log10(Distance(D)/1)+1.7; % CI
-       DiffractionLoss = KNDiff1(Distance(D),Wavelength(W),TXheight+40);
+       DiffractionLoss = KNDiff1(Distance(D),Wavelength(W),TXheight-25);
        R(D) = K1(W)+K2*log10(Distance(D))+K3*log10(HTeff)+K4*DiffractionLoss+K5*log10(Distance(D))*log10(HTeff);
     end
     plot(Distance,R)
