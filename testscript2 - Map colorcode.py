@@ -26,9 +26,11 @@ lng110 = []
 lng120 = []
 lngs = []
 #file = np.genfromtxt('C:\Testsides3\Walk fra edge til kildedal st.csv', delimiter= ',')
-#file = np.genfromtxt('C:\Testsides3\Maalov1 Walk.csv', delimiter= ',')
-file = np.genfromtxt('C:\Testsides3\Alb Real1.csv', delimiter= ',')
+file = np.genfromtxt('C:\Testsides3\Maalov1 Walk.csv', delimiter= ',')
+#file = np.genfromtxt('C:\Testsides3\Alb Real1.csv', delimiter= ',')
 #file = np.genfromtxt('C:\Testsides3\Quick maalov for switch.csv', delimiter= ',')
+#file = np.genfromtxt('C:\Testsides3\Tog.csv', delimiter= ',')
+
 
 
 THDL = file[:,9] #THDL
@@ -40,6 +42,9 @@ lat = file[:,57] #lat
 lng = file[:,58] #lng
 alt = file[:,59] #alt
 
+trans = file[:,68] #trans
+
+
 THDL = THDL[~np.isnan(THDL)]
 RSRP = RSRP[~np.isnan(RSRP)]
 RSRQ = RSRQ[~np.isnan(RSRQ)]
@@ -47,12 +52,15 @@ SINR = SINR[~np.isnan(SINR)]
 lat = lat[~np.isnan(lat)]
 lng = lng[~np.isnan(lng)]
 alt = alt[~np.isnan(alt)]
+trans = trans[~np.isnan(trans)]
+
 
 
 
 print(RSRP)
 print(lat)
 print(lng)
+print(trans)
 """""
 RSRP = RSRP[1::50]
 lat = lat[1::100]
@@ -62,6 +70,7 @@ alt = alt[1::100]
 print(np.size(RSRP))
 print(np.size(lat))
 print(np.size(lng))
+print(np.size(trans))
 
 gmap3 = gmplot.GoogleMapPlotter(55.751071, 12.297769, 15)
 
@@ -123,6 +132,10 @@ print("-------------------")
 print("THDL MAX: ",np.max(THDL))
 print("THDL mean: ",np.mean(THDL))
 print("THDL MIN: ",np.min(THDL))
+print("-------------------")
+print("Trans MAX: ",np.max(trans))
+print("Trans mean: ",np.mean(trans))
+print("Trans MIN: ",np.min(trans))
 print("-------------------")
 
 
